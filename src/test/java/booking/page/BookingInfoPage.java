@@ -2,8 +2,10 @@ package booking.page;
 
 import booking.constants.Link;
 import booking.core.BasePage;
+import booking.helpers.InputHelper;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class BookingInfoPage extends BasePage {
     @FindBy(xpath = "//input[@ng-model='bookingCode']")
@@ -21,15 +23,31 @@ public class BookingInfoPage extends BasePage {
     @FindBy(xpath = "//span[@ng-show='bookingCodeError' and not(contains(@class, 'ng-hide'))]")
     WebElement errorMessage;
 
+    @FindBy(xpath = "//h4[@class='ng-binding']")
+    WebElement notFoundMessage;
+
     public BookingInfoPage() {
         super();
-    }
-
-    public void openPage() {
-        driver.get(Link.CHECK_BOOKING_INFO);
+        this.pageUrl = Link.CHECK_BOOKING_INFO;
+        PageFactory.initElements(driver, this);
     }
 
     public String getErrorMessage() {
-        return errorMessage.getText();
+        String errorMessageText;
+        try {
+            errorMessageText = errorMessage.getText();
+        } catch (Exception e) {
+            errorMessageText = notFoundMessage.getText();
+        }
+        return errorMessageText;
+
+    }
+
+
+    public void searchBookingInfo(String bookingCode, String email, String phoneNumber) {
+        InputHelper.sendKey(bookingCodeField, bookingCode);
+        InputHelper.sendKey(emailField, email);
+        InputHelper.sendKey(phoneField, phoneNumber);
+        searchBtn.click();
     }
 }

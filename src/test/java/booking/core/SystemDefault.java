@@ -20,6 +20,6 @@ public class SystemDefault {
     public static final String DOWNLOAD_PATH = CommonHelper.getCurrentDir() + envReader.getProperty("DOWNLOAD_FOLDER");
     public static final String RESOURCE_PATH = CommonHelper.getCurrentDir() + envReader.getProperty("RESOURCE_FOLDER");
     public static final String TEST_CASE_FILE = RESOURCE_PATH + envReader.getProperty("TEST_CASE_FILE");
-    public static final String TEST_DATA_ROLE_FILE = RESOURCE_PATH + envReader.getProperty("TEST_DATA_ROLE_FILE");
-    public static final String TEST_DATA_ROLE_FILE_BACKUP = RESOURCE_PATH + envReader.getProperty("TEST_DATA_ROLE_FILE_BACKUP");
+    public static final String TEST_DATA_FILE = RESOURCE_PATH + "data/" + envReader.getProperty("TEST_DATA_FILE");
+    public static final String TEST_DATA_FILE_BACKUP = RESOURCE_PATH + "data/" + envReader.getProperty("TEST_DATA_FILE_BACKUP");
 }

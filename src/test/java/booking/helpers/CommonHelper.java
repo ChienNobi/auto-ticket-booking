@@ -4,7 +4,13 @@ import booking.constants.Common;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 
@@ -53,6 +59,27 @@ public class CommonHelper {
     }
 
     public static boolean isEmptyString(String text) {
-        return text != null && !text.isBlank() && !text.isEmpty();
+        return text == null || text.isBlank() || text.isEmpty();
+    }
+
+    public static String getCurrentLocalDateTime(String pattern) {
+        LocalDateTime localDate = LocalDateTime.now();
+        return String.valueOf(DateTimeFormatter.ofPattern(pattern).format(localDate));
+    }
+
+    public static String getCurrentLocalDateTime() {
+        return getCurrentLocalDateTime("dd-MM-yy HH:mm");
+    }
+
+    public static Calendar validateDateTime(String dateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date date = dateFormat.parse(dateString);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            return calendar;
+        } catch (ParseException e) {
+            return null;
+        }
     }
 }

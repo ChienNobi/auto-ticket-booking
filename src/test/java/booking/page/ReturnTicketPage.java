@@ -1,8 +1,10 @@
 package booking.page;
 
+import booking.constants.Link;
 import booking.core.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class ReturnTicketPage extends BasePage {
     @FindBy(xpath = "//input[@ng-model='bookingCode']")
@@ -28,4 +30,10 @@ public class ReturnTicketPage extends BasePage {
 
     @FindBy(xpath = "//button[@ng-click='newRequestTraVe()']")
     WebElement confirmBtn;
+
+    public ReturnTicketPage() {
+        super();
+        this.pageUrl = Link.RETURN_TICKET;
+        PageFactory.initElements(driver, this);
+    }
 }
